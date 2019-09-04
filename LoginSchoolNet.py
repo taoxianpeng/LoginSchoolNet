@@ -14,7 +14,7 @@ def sendMessage():
         }
     try:
         r = requests.post("http://59.71.0.168/sendsmsAction.do",postData_sM)
-        if r.text==1:
+        if r.text.find('1')!=-1:
             print("信息发送成功")
         else:
             print("error:信息发送失败")
@@ -121,12 +121,12 @@ def input_pwd():
     if rep == 'y':
         print('正在重新发送密码到手机上.......')
         sendMessage()
-    if rep == 'n':
-        password = input("请填写密码: ")
-        if not savePws():
-            print('保存密码错误')
-        else:
-            print('密码保存成功！')
+    #if rep == 'n':
+    password = input("请填写密码: ")
+    if not savePws():
+        print('保存密码错误')
+    else:
+        print('密码保存成功！')
 def disconnect():
     postDate_disconnect = {
         'portaltype': '',
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     #sendMessage()
     #time.sleep(3000)
     if not os.path.exists(ab_address):
-        with open(ab_address+'/config','w') as f:
+        with open(ab_address,'w') as f:
             f.close()
 
     print('1 - 登录\n2 - 断开\n0 - 关闭程序')
